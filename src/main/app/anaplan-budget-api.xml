@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:anaplan="http://www.mulesoft.org/schema/mule/anaplan" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/anaplan http://www.mulesoft.org/schema/mule/anaplan/current/mule-anaplan.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    <http:listener-config name="HTTP_Listener_Configuration" host="${http.host}" port="${http.port}"  doc:name="HTTP Listener Configuration"/>
+    <anaplan:basic-auth-connection name="Anaplan__Basic_Authentication" username="${anaplan.username}" password="${anaplan.password}" doc:name="Anaplan: Basic Authentication"/>
+
+    <flow name="flow_getCostCentreSubDeptName">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/costcenter" doc:name="/costcenter"/>
+        <set-variable variableName="costcenterid" value="#[message.inboundProperties.'http.query.params'.costcenterid]" mimeType="text/plain" metadata:id="dfdffc80-310e-40a3-a453-946e74f8864c" doc:name="Get costcenterid"/>
+        <flow-ref name="subflow_getCostCenterfromAnaplan" doc:name="subflow_getCostCenterfromAnaplan"/>
+        <set-payload value="#[payload.get(flowVars.costcenterid).subDepartment]" doc:name="Set Payload"/>
+    </flow>
+    <flow name="flow_getsubDeptNameBudget">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/budget" doc:name="/budget"/>
+        <set-variable variableName="subdept" value="#[message.inboundProperties.'http.query.params'.subdept]" doc:name="Set subdept"/>
+        <flow-ref name="subflow_getBudgetfromAnaplan" doc:name="subflow_getBudgetfromAnaplan"/>
+        <set-payload value="{&quot;SubDept&quot;:&quot;#[flowVars.subdept]&quot;,&quot;Period&quot;:&quot;#[payload.get(flowVars.subdept).period]&quot;,&quot;AvailableBudget&quot;:#[payload.get(flowVars.subdept).budgetLeft]}" doc:name="Create Budget Response" mimeType="application/json"/>
+    </flow>
+    <flow name="flow_getCostCenterBudget">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/costcenterbudget" doc:name="/costcenterbudget"/>
+        <set-variable variableName="costcenterid" value="#[message.inboundProperties.'http.query.params'.costcenterid]" mimeType="text/plain" metadata:id="dfdffc80-310e-40a3-a453-946e74f8864c" doc:name="Get costcenterid"/>
+        <flow-ref name="subflow_getCostCenterfromAnaplan" doc:name="subflow_getCostCenterfromAnaplan"/>
+        <set-variable variableName="subdept" value="#[payload.get(flowVars.costcenterid).subDepartment]" doc:name="Set subdept"/>
+        <flow-ref name="subflow_getBudgetfromAnaplan" doc:name="subflow_getBudgetfromAnaplan"/>
+        <set-payload value="{&quot;CostCenter&quot;:&quot;#[flowVars.costcenterid]&quot;,&quot;SubDept&quot;:&quot;#[flowVars.subdept]&quot;,&quot;Period&quot;:&quot;#[payload.get(flowVars.subdept).period]&quot;,&quot;AvailableBudget&quot;:#[payload.get(flowVars.subdept).budgetLeft]}" doc:name="Create Budget Response" mimeType="application/json"/>
+    </flow>
+    
+    <sub-flow name="subflow_getCostCenterfromAnaplan">
+        <ee:cache doc:name="Cache">
+            <anaplan:export-from-model config-ref="Anaplan__Basic_Authentication" exportId="${anaplan.costcenterexportid}" modelId="${anaplan.modelid}" workspaceId="${anaplan.workspaceid}" doc:name="Export Cost Center"/>
+            <dw:transform-message metadata:id="5783fe69-ddbe-49fb-bc72-556085b496c2" doc:name="Transform Message">
+                <dw:input-payload doc:sample="sample_data/list_csv.csv" mimeType="application/csv"/>
+                <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+%var costcenters = payload.*Code 
+%var p = payload
+---
+{(
+costcenters map (
+	'$' : {
+		subDepartment: p[$$]."Sub Department"
+	} 
+) 
+)}]]></dw:set-payload>
+            </dw:transform-message>
+        </ee:cache>
+    </sub-flow>
+    <sub-flow name="subflow_getBudgetfromAnaplan">
+        <ee:cache doc:name="Cache">
+            <anaplan:export-from-model config-ref="Anaplan__Basic_Authentication" exportId="${anaplan.budgetexportid}" modelId="${anaplan.modelid}" workspaceId="${anaplan.workspaceid}" doc:name="Export Budget"/>
+            <dw:transform-message metadata:id="9ce33495-c145-4bba-b266-d41039feab51" doc:name="Transform Message">
+                <dw:input-payload mimeType="application/csv"/>
+                <dw:set-payload><![CDATA[%dw 1.0
+%output application/csv
+%var filterPeriod = "FY17"
+%var filterVersion = "Budget 2016"
+---
+payload[?($.Period == "FY17")][?($.Version == "Budget 2016")]]]></dw:set-payload>
+            </dw:transform-message>
+            <dw:transform-message metadata:id="137691f9-7f47-4a87-beec-5742d27a9e47" doc:name="Transform Message">
+                <dw:input-payload mimeType="application/csv"/>
+                <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+%var subdept = payload.*"Sub Department Rollup" 
+%var p = payload
+---
+{(
+subdept map (
+	'$' : {
+		period: p[$$].Period,
+		budgetLeft: p[$$]."Amount Left"
+	} 
+) 
+)}]]></dw:set-payload>
+            </dw:transform-message>
+        </ee:cache>
+    </sub-flow>
+</mule>

@@ -1,0 +1,32 @@
+[
+  {
+    "costCenter": "OMO",
+    "parent": "Management/OMO",
+    "code": "",
+    "orgRollUps": "",
+    "description": "",
+    "region": "",
+    "entity": "",
+    "subDepartment": ""
+  },
+  {
+    "costCenter": "S100MGT005",
+    "parent": "Director of Marketing (Global)",
+    "code": "S100MGT005",
+    "orgRollUps": "Management/OMO",
+    "description": "Management",
+    "region": "",
+    "entity": "0",
+    "subDepartment": "Director of Marketing (Global)"
+  },
+  {
+    "costCenter": "E100MGT005",
+    "parent": "Director of Marketing (Global)",
+    "code": "E100MGT005",
+    "orgRollUps": "Management/OMO",
+    "description": "Management",
+    "region": "",
+    "entity": "0",
+    "subDepartment": "Director of Marketing (Global)"
+  }
+]

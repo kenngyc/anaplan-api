@@ -1,0 +1,35 @@
+[
+  {
+    "targetTest": "CEO",
+    "version": "Actual",
+    "period": "FY13",
+    "subDepartmentRollup": "CEO",
+    "actualYTD": "0",
+    "managementTarget": "0",
+    "departmentPlan": "600192.01",
+    "variance": "600192.01",
+    "amountLeft": "0"
+  },
+  {
+    "targetTest": "HR",
+    "version": "Actual",
+    "period": "FY13",
+    "subDepartmentRollup": "HR",
+    "actualYTD": "0",
+    "managementTarget": "0",
+    "departmentPlan": "159639.27",
+    "variance": "159639.27",
+    "amountLeft": "0"
+  },
+  {
+    "targetTest": "Legal",
+    "version": "Actual",
+    "period": "FY13",
+    "subDepartmentRollup": "Legal",
+    "actualYTD": "0",
+    "management Target": "0",
+    "departmentPlan": "1246642.93",
+    "variance": "1246642.93",
+    "amountLeft": "0"
+  }
+]

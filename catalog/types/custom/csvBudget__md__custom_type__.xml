@@ -1,0 +1,185 @@
+<custom__type__definition>
+  <version>5.2.0.0</version>
+  <typeName class="org.mule.common.metadata.DefaultMetaDataKey">
+    <id>csvBudget</id>
+    <displayName>csvBudget</displayName>
+    <category>DEFAULT</category>
+    <metaDataKeyPropertiesManager>
+      <properties>
+        <org.mule.common.metadata.key.property.dsql.DsqlFromMetaDataKeyProperty/>
+      </properties>
+    </metaDataKeyPropertiesManager>
+  </typeName>
+  <metadataModel class="org.mule.common.metadata.DefaultListMetaDataModel">
+    <dataType>LIST</dataType>
+    <metaDataModelPropertiesManager>
+      <properties/>
+    </metaDataModelPropertiesManager>
+    <model class="org.mule.common.metadata.DefaultStructuredMetadataModel">
+      <dataType>CSV</dataType>
+      <metaDataModelPropertiesManager>
+        <properties>
+          <org.mule.common.metadata.property.CSVHasHeadersMetaDataProperty>
+            <hasHeaders>true</hasHeaders>
+          </org.mule.common.metadata.property.CSVHasHeadersMetaDataProperty>
+        </properties>
+      </metaDataModelPropertiesManager>
+      <fields>
+        <org.mule.common.metadata.DefaultMetaDataField>
+          <name>Target test</name>
+          <model class="org.mule.common.metadata.DefaultSimpleMetaDataModel">
+            <dataType>STRING</dataType>
+            <metaDataModelPropertiesManager>
+              <properties/>
+            </metaDataModelPropertiesManager>
+          </model>
+          <accessType>READ</accessType>
+          <metaDataFieldPropertyManager>
+            <properties>
+              <org.mule.common.metadata.property.LabelMetaDataProperty>
+                <label>Target test</label>
+              </org.mule.common.metadata.property.LabelMetaDataProperty>
+            </properties>
+          </metaDataFieldPropertyManager>
+        </org.mule.common.metadata.DefaultMetaDataField>
+        <org.mule.common.metadata.DefaultMetaDataField>
+          <name>Version</name>
+          <model class="org.mule.common.metadata.DefaultSimpleMetaDataModel">
+            <dataType>STRING</dataType>
+            <metaDataModelPropertiesManager>
+              <properties/>
+            </metaDataModelPropertiesManager>
+          </model>
+          <accessType>READ</accessType>
+          <metaDataFieldPropertyManager>
+            <properties>
+              <org.mule.common.metadata.property.LabelMetaDataProperty>
+                <label>Version</label>
+              </org.mule.common.metadata.property.LabelMetaDataProperty>
+            </properties>
+          </metaDataFieldPropertyManager>
+        </org.mule.common.metadata.DefaultMetaDataField>
+        <org.mule.common.metadata.DefaultMetaDataField>
+          <name>Period</name>
+          <model class="org.mule.common.metadata.DefaultSimpleMetaDataModel">
+            <dataType>STRING</dataType>
+            <metaDataModelPropertiesManager>
+              <properties/>
+            </metaDataModelPropertiesManager>
+          </model>
+          <accessType>READ</accessType>
+          <metaDataFieldPropertyManager>
+            <properties>
+              <org.mule.common.metadata.property.LabelMetaDataProperty>
+                <label>Period</label>
+              </org.mule.common.metadata.property.LabelMetaDataProperty>
+            </properties>
+          </metaDataFieldPropertyManager>
+        </org.mule.common.metadata.DefaultMetaDataField>
+        <org.mule.common.metadata.DefaultMetaDataField>
+          <name>Sub Department Rollup</name>
+          <model class="org.mule.common.metadata.DefaultSimpleMetaDataModel">
+            <dataType>STRING</dataType>
+            <metaDataModelPropertiesManager>
+              <properties/>
+            </metaDataModelPropertiesManager>
+          </model>
+          <accessType>READ</accessType>
+          <metaDataFieldPropertyManager>
+            <properties>
+              <org.mule.common.metadata.property.LabelMetaDataProperty>
+                <label>Sub Department Rollup</label>
+              </org.mule.common.metadata.property.LabelMetaDataProperty>
+            </properties>
+          </metaDataFieldPropertyManager>
+        </org.mule.common.metadata.DefaultMetaDataField>
+        <org.mule.common.metadata.DefaultMetaDataField>
+          <name>Actual YTD</name>
+          <model class="org.mule.common.metadata.DefaultSimpleMetaDataModel">
+            <dataType>STRING</dataType>
+            <metaDataModelPropertiesManager>
+              <properties/>
+            </metaDataModelPropertiesManager>
+          </model>
+          <accessType>READ</accessType>
+          <metaDataFieldPropertyManager>
+            <properties>
+              <org.mule.common.metadata.property.LabelMetaDataProperty>
+                <label>Actual YTD</label>
+              </org.mule.common.metadata.property.LabelMetaDataProperty>
+            </properties>
+          </metaDataFieldPropertyManager>
+        </org.mule.common.metadata.DefaultMetaDataField>
+        <org.mule.common.metadata.DefaultMetaDataField>
+          <name>Management Target</name>
+          <model class="org.mule.common.metadata.DefaultSimpleMetaDataModel">
+            <dataType>STRING</dataType>
+            <metaDataModelPropertiesManager>
+              <properties/>
+            </metaDataModelPropertiesManager>
+          </model>
+          <accessType>READ</accessType>
+          <metaDataFieldPropertyManager>
+            <properties>
+              <org.mule.common.metadata.property.LabelMetaDataProperty>
+                <label>Management Target</label>
+              </org.mule.common.metadata.property.LabelMetaDataProperty>
+            </properties>
+          </metaDataFieldPropertyManager>
+        </org.mule.common.metadata.DefaultMetaDataField>
+        <org.mule.common.metadata.DefaultMetaDataField>
+          <name>Department Plan</name>
+          <model class="org.mule.common.metadata.DefaultSimpleMetaDataModel">
+            <dataType>STRING</dataType>
+            <metaDataModelPropertiesManager>
+              <properties/>
+            </metaDataModelPropertiesManager>
+          </model>
+          <accessType>READ</accessType>
+          <metaDataFieldPropertyManager>
+            <properties>
+              <org.mule.common.metadata.property.LabelMetaDataProperty>
+                <label>Department Plan</label>
+              </org.mule.common.metadata.property.LabelMetaDataProperty>
+            </properties>
+          </metaDataFieldPropertyManager>
+        </org.mule.common.metadata.DefaultMetaDataField>
+        <org.mule.common.metadata.DefaultMetaDataField>
+          <name>Variance</name>
+          <model class="org.mule.common.metadata.DefaultSimpleMetaDataModel">
+            <dataType>STRING</dataType>
+            <metaDataModelPropertiesManager>
+              <properties/>
+            </metaDataModelPropertiesManager>
+          </model>
+          <accessType>READ</accessType>
+          <metaDataFieldPropertyManager>
+            <properties>
+              <org.mule.common.metadata.property.LabelMetaDataProperty>
+                <label>Variance</label>
+              </org.mule.common.metadata.property.LabelMetaDataProperty>
+            </properties>
+          </metaDataFieldPropertyManager>
+        </org.mule.common.metadata.DefaultMetaDataField>
+        <org.mule.common.metadata.DefaultMetaDataField>
+          <name>Amount Left</name>
+          <model class="org.mule.common.metadata.DefaultSimpleMetaDataModel">
+            <dataType>STRING</dataType>
+            <metaDataModelPropertiesManager>
+              <properties/>
+            </metaDataModelPropertiesManager>
+          </model>
+          <accessType>READ</accessType>
+          <metaDataFieldPropertyManager>
+            <properties>
+              <org.mule.common.metadata.property.LabelMetaDataProperty>
+                <label>Amount Left</label>
+              </org.mule.common.metadata.property.LabelMetaDataProperty>
+            </properties>
+          </metaDataFieldPropertyManager>
+        </org.mule.common.metadata.DefaultMetaDataField>
+      </fields>
+    </model>
+    <isArray>false</isArray>
+  </metadataModel>
+</custom__type__definition>

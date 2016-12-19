@@ -1,0 +1,13 @@
+{
+    "inputMessageMetadata": {},
+    "outputMessageMetadata": {
+        "flowVariables": {
+            "costcenterid": {
+                "connectorName": "#_custom_mule_metadata_type_#",
+                "typeId": "string"
+            }
+        }
+    },
+    "id": "dfdffc80-310e-40a3-a453-946e74f8864c",
+    "version": "5.2.0.0"
+}
